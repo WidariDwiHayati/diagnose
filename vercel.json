@@ -1,0 +1,11 @@
+{
+  "builds": [
+    { "src": "main.py", "use": "@vercel/python" },
+    { "src": "*.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/predict", "dest": "/main.py" },
+    { "src": "/riwayat(.*)", "dest": "/main.py" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}

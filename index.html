@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Diagnosa AI - Input</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    <style>
+        @layer base { html,body { margin:0; padding:0; background-color: #e8eaf0; font-family: 'Plus Jakarta Sans', sans-serif;} }
+        .neo-raised { box-shadow: 6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.6); }
+        .neo-inset { box-shadow: inset 4px 4px 8px rgba(0,0,0,0.06), inset -4px -4px 8px rgba(255,255,255,0.5); }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:"#6366f1",surface:"#e8eaf0"}}}}</script>
+</head>
+<body class="text-gray-800 flex min-h-screen">
+
+    <aside class="w-64 bg-surface neo-raised fixed h-full flex flex-col p-6 z-50">
+        <div class="flex items-center gap-3 mb-10">
+            <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white neo-raised">
+                <span class="material-symbols-outlined text-xl">stethoscope</span>
+            </div>
+            <h1 class="font-bold text-lg leading-tight text-gray-800">MedikaCare<br><span class="text-xs font-normal text-gray-500">Sistem Cerdas</span></h1>
+        </div>
+        <nav class="flex flex-col gap-3">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl neo-inset text-primary font-semibold transition-all"><span class="material-symbols-outlined">clinical_notes</span> Input Diagnosa</a>
+            <a href="riwayat.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:neo-inset text-gray-600 hover:text-primary font-semibold transition-all"><span class="material-symbols-outlined">history</span> Riwayat Pasien</a>
+        </nav>
+    </aside>
+
+    <main class="ml-64 flex-1 p-8 lg:p-12">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-2">Formulir Diagnosa AI</h2>
+            <p class="text-gray-500 mb-8" id="pageDesc">Masukkan data vital dan gejala pasien untuk dianalisis.</p>
+
+            <div class="bg-surface rounded-2xl p-8 neo-raised w-full">
+                <form id="diagnosaForm" class="space-y-8">
+                    <input type="hidden" id="edit_id" value="">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Input Nama Pasien -->
+                        <div class="flex flex-col gap-1.5 md:col-span-2">
+                            <label class="text-xs font-semibold">Nama Pasien</label>
+                            <input type="text" id="Patient_Name" placeholder="Contoh: Budi Santoso" required class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none placeholder:text-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-semibold">Usia</label>
+                            <input type="number" id="Age" placeholder="Contoh: 25" required class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none placeholder:text-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-semibold">Jenis Kelamin</label>
+                            <select id="Gender" class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none cursor-pointer">
+                                <option value="Male">Laki-laki</option>
+                                <option value="Female">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-semibold">Detak Jantung (bpm)</label>
+                            <input type="number" id="Heart_Rate_bpm" placeholder="Contoh: 80" required class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none placeholder:text-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-semibold">SpO2 (%)</label>
+                            <input type="number" id="Oxygen_Saturation" placeholder="Contoh: 98" required class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none placeholder:text-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-semibold">Sistolik</label>
+                            <input type="number" id="Systolic" placeholder="Contoh: 120" required class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none placeholder:text-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-semibold">Diastolik</label>
+                            <input type="number" id="Diastolic" placeholder="Contoh: 80" required class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none placeholder:text-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-1.5 md:col-span-2">
+                            <label class="text-xs font-semibold">Suhu Tubuh (°C)</label>
+                            <input type="number" step="0.1" id="Body_Temperature" placeholder="Contoh: 36.5" required class="w-full bg-surface rounded-xl px-4 py-3 text-sm neo-inset focus:outline-none placeholder:text-gray-400">
+                        </div>
+                    </div>
+
+                    <h3 class="text-sm font-semibold border-b border-gray-300 pb-2 mt-6">Gejala Terdeteksi</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="body_ache" class="rounded text-primary"> <span class="text-xs">Badan Pegal</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="shortness_of_breath" class="rounded text-primary"> <span class="text-xs">Sesak Napas</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="cough" class="rounded text-primary"> <span class="text-xs">Batuk</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="fatigue" class="rounded text-primary"> <span class="text-xs">Kelelahan</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="sore_throat" class="rounded text-primary"> <span class="text-xs">Sakit Tenggorokan</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="fever" class="rounded text-primary"> <span class="text-xs">Demam</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="headache" class="rounded text-primary"> <span class="text-xs">Sakit Kepala</span></label>
+                        <label class="flex items-center space-x-2"><input type="checkbox" id="runny_nose" class="rounded text-primary"> <span class="text-xs">Hidung Meler</span></label>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <a href="riwayat.html" id="btnBatalEdit" class="hidden py-3 px-6 rounded-xl bg-surface neo-raised text-red-500 font-semibold text-sm">Batal</a>
+                        <button type="submit" id="btnSubmit" class="flex-1 py-3 px-6 rounded-xl bg-surface neo-raised text-primary font-semibold text-sm">Proses Diagnosa</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="resultBox" class="hidden bg-surface rounded-2xl p-6 mt-8 neo-raised border-l-4 border-primary">
+                <h3 class="text-lg font-semibold mb-4">Hasil Analisis</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div><p class="text-xs text-gray-500">Diagnosa</p><p id="resDiagnosis" class="font-bold text-lg">-</p></div>
+                    <div><p class="text-xs text-gray-500">Keparahan</p><p id="resSeverity" class="font-bold text-lg">-</p></div>
+                    <div><p class="text-xs text-gray-500">Tindakan</p><p id="resTreatment" class="font-bold text-lg">-</p></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.onload = async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const editId = urlParams.get('edit');
+            if(editId) {
+                document.getElementById('edit_id').value = editId;
+                document.getElementById('btnSubmit').innerText = "Update & Prediksi Ulang";
+                document.getElementById('btnBatalEdit').classList.remove('hidden');
+                document.getElementById('pageDesc').innerText = `Sedang mengedit rekam medis #${editId}`;
+                
+                try {
+                    const res = await fetch("/riwayat");
+                    const allData = await res.json();
+                    const data = allData.find(p => p.id == editId);
+                    if(data) {
+                        document.getElementById('Patient_Name').value = data.Patient_Name;
+                        document.getElementById('Age').value = data.Age;
+                        document.getElementById('Gender').value = data.Gender === "Laki-laki" ? "Male" : "Female";
+                        document.getElementById('Heart_Rate_bpm').value = data.Heart_Rate_bpm;
+                        document.getElementById('Oxygen_Saturation').value = data.Oxygen_Saturation;
+                        document.getElementById('Systolic').value = data.Systolic;
+                        document.getElementById('Diastolic').value = data.Diastolic;
+                        document.getElementById('Body_Temperature').value = data.Body_Temperature;
+                        document.getElementById('body_ache').checked = data.Body_ache === 1;
+                        document.getElementById('shortness_of_breath').checked = data.Shortness_of_breath === 1;
+                        document.getElementById('cough').checked = data.Cough === 1;
+                        document.getElementById('fatigue').checked = data.Fatigue === 1;
+                        document.getElementById('sore_throat').checked = data.Sore_throat === 1;
+                        document.getElementById('fever').checked = data.Fever === 1;
+                        document.getElementById('headache').checked = data.Headache === 1;
+                        document.getElementById('runny_nose').checked = data.Runny_nose === 1;
+                    }
+                } catch(err) {}
+            }
+        };
+
+        document.getElementById("diagnosaForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); 
+            const editId = document.getElementById("edit_id").value;
+            const url = editId ? `/riwayat/${editId}` : `/predict`;
+            
+            const payload = {
+                "Patient_Name": document.getElementById("Patient_Name").value,
+                "Age": parseInt(document.getElementById("Age").value),
+                "Heart_Rate_bpm": parseInt(document.getElementById("Heart_Rate_bpm").value),
+                "Oxygen_Saturation_%": parseInt(document.getElementById("Oxygen_Saturation").value),
+                "Systolic": parseInt(document.getElementById("Systolic").value),
+                "Diastolic": parseInt(document.getElementById("Diastolic").value),
+                "Body_Temperature": parseFloat(document.getElementById("Body_Temperature").value),
+                "Male": document.getElementById("Gender").value === "Male" ? 1 : 0,
+                "Female": document.getElementById("Gender").value === "Female" ? 1 : 0,
+                "Body ache": document.getElementById("body_ache").checked ? 1 : 0,
+                "Shortness of breath": document.getElementById("shortness_of_breath").checked ? 1 : 0,
+                "Cough": document.getElementById("cough").checked ? 1 : 0,
+                "Fatigue": document.getElementById("fatigue").checked ? 1 : 0,
+                "Sore throat": document.getElementById("sore_throat").checked ? 1 : 0,
+                "Fever": document.getElementById("fever").checked ? 1 : 0,
+                "Headache": document.getElementById("headache").checked ? 1 : 0,
+                "Runny nose": document.getElementById("runny_nose").checked ? 1 : 0
+            };
+
+            const btn = document.getElementById('btnSubmit');
+            btn.innerText = "Memproses...";
+            
+            try {
+                const response = await fetch(url, { method: editId ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById("resultBox").classList.remove("hidden");
+                    document.getElementById("resDiagnosis").innerText = data.Diagnosis;
+                    document.getElementById("resSeverity").innerText = data.Severity;
+                    document.getElementById("resTreatment").innerText = data.Treatment_Plan;
+                    if(editId) setTimeout(() => window.location.href = "riwayat.html", 2500);
+                }
+            } catch (error) { alert("Gagal memproses data."); } 
+            finally { btn.innerText = editId ? "Update & Prediksi Ulang" : "Proses Diagnosa"; }
+        });
+    </script>
+</body>
+</html>
